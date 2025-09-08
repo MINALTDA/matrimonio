@@ -5,7 +5,7 @@ import { Heart, Instagram, Facebook, Twitter, Mail, Phone } from 'lucide-react'
 import { useTranslation } from '../../hooks/useTranslation'
 
 export default function Footer() {
-  const { t, locale } = useTranslation('common')
+  const { locale } = useTranslation('common')
 
   const socialLinks = [
     {

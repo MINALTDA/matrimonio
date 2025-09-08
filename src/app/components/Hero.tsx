@@ -149,7 +149,7 @@ export default function Hero() {
               { label: t('countdown.hours', 'Horas'), value: timeLeft.hours },
               { label: t('countdown.minutes', 'Min'), value: timeLeft.minutes },
               { label: t('countdown.seconds', 'Seg'), value: timeLeft.seconds },
-            ].map((item, index) => (
+            ].map((item) => (
               <div key={item.label} className="text-center">
                 <div className="bg-white/30 backdrop-blur-sm rounded-xl p-3 mb-2">
                   <span className="text-2xl md:text-3xl font-bold text-gray-800">

@@ -4,7 +4,14 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 import { X } from 'lucide-react'
+import Image from 'next/image'
 import { useTranslation } from '../../hooks/useTranslation'
+
+interface ImageData {
+  src: string
+  alt: string
+  title: string
+}
 
 export default function Gallery() {
   const { t, loading } = useTranslation('wedding')
@@ -13,9 +20,9 @@ export default function Gallery() {
     threshold: 0.1
   })
 
-  const [selectedImage, setSelectedImage] = useState<any>(null)
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null)
 
-  const images = [
+  const images: ImageData[] = [
     {
       src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       alt: 'Carlos y Elizabeth en la playa',
@@ -95,9 +102,11 @@ export default function Gallery() {
               onClick={() => setSelectedImage(image)}
             >
               <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform group-hover:scale-105">
-                <img
+                <Image
                   src={image.src}
                   alt={image.alt}
+                  width={800}
+                  height={600}
                   className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -131,9 +140,11 @@ export default function Gallery() {
               >
                 <X className="w-6 h-6" />
               </button>
-              <img
+              <Image
                 src={selectedImage.src}
                 alt={selectedImage.alt}
+                width={1200}
+                height={800}
                 className="w-full h-auto max-h-[80vh] object-contain"
               />
               <div className="p-6">
