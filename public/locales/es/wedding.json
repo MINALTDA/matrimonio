@@ -1,0 +1,75 @@
+{
+  "timeline": {
+    "title": "Nuestra Historia de Amor",
+    "subtitle": "Cada momento nos ha llevado hasta aquí, y ahora queremos escribir el siguiente capítulo contigo a nuestro lado.",
+    "events": {
+      "meeting": {
+        "year": "2018",
+        "title": "Nos Conocimos",
+        "description": "Un encuentro casual en la universidad que cambió nuestras vidas para siempre."
+      },
+      "firstDate": {
+        "year": "2020",
+        "title": "Primera Cita",
+        "description": "Una cena romántica que confirmó que éramos el uno para el otro."
+      },
+      "proposal": {
+        "year": "2023",
+        "title": "La Propuesta",
+        "description": "En la playa al atardecer, Carlos le pidió matrimonio a Elizabeth."
+      },
+      "wedding": {
+        "year": "2024",
+        "title": "Nuestra Boda",
+        "description": "El día más especial de nuestras vidas, que queremos compartir contigo."
+      }
+    }
+  },
+  "gallery": {
+    "title": "Nuestros Momentos Especiales",
+    "subtitle": "Una colección de los momentos más hermosos que hemos compartido juntos.",
+    "photos": {
+      "beach": "Nuestro primer viaje juntos",
+      "dinner": "Celebrando nuestro aniversario",
+      "proposal": "El momento de la propuesta",
+      "engagement": "Sesión de compromiso",
+      "adventure": "Explorando el mundo",
+      "memories": "Creando recuerdos"
+    }
+  },
+  "location": {
+    "title": "Lugar y Horarios",
+    "subtitle": "Todos los detalles para que no te pierdas ni un momento de nuestra celebración.",
+    "venue": "Jardín Botánico Real",
+    "address": "Plaza de Murillo, 2, Madrid",
+    "schedule": {
+      "ceremony": {
+        "title": "Ceremonia",
+        "time": "16:00 hrs",
+        "description": "Ceremonia religiosa en el Jardín Botánico"
+      },
+      "cocktail": {
+        "title": "Cóctel",
+        "time": "17:30 hrs",
+        "description": "Cóctel de bienvenida y sesión de fotos"
+      },
+      "reception": {
+        "title": "Recepción",
+        "time": "19:00 hrs",
+        "description": "Cena y fiesta en el Salón de Eventos"
+      }
+    },
+    "additionalInfo": {
+      "title": "Información Adicional",
+      "dressCode": "Dress code: Formal / Cocktail",
+      "parking": "Estacionamiento disponible",
+      "outdoor": "Ceremonia al aire libre",
+      "glutenFree": "Menú sin gluten disponible"
+    }
+  },
+  "rsvp": {
+    "title": "Confirma tu Asistencia",
+    "subtitle": "Tu presencia es el mejor regalo. Por favor, confirma tu asistencia antes del 1 de junio.",
+    "deadline": "Fecha límite: 1 de Junio, 2024"
+  }
+}

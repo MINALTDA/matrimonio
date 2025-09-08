@@ -1,0 +1,17 @@
+{
+  "names": "Carlos & Elizabeth",
+  "subtitle": "Estamos nos casando e queremos celebrar com você",
+  "date": "15 de Junho, 2024",
+  "location": "Jardim Botânico, Madrid",
+  "countdown": {
+    "days": "Dias",
+    "hours": "Horas",
+    "minutes": "Min",
+    "seconds": "Seg"
+  },
+  "venue": {
+    "ceremony": "Cerimônia",
+    "cocktail": "Coquetel",
+    "reception": "Recepção"
+  }
+}

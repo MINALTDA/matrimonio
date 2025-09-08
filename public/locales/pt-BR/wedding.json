@@ -1,0 +1,75 @@
+{
+  "timeline": {
+    "title": "Nossa História de Amor",
+    "subtitle": "Cada momento nos trouxe até aqui, e agora queremos escrever o próximo capítulo com você ao nosso lado.",
+    "events": {
+      "meeting": {
+        "year": "2018",
+        "title": "Nos Conhecemos",
+        "description": "Um encontro casual na universidade que mudou nossas vidas para sempre."
+      },
+      "firstDate": {
+        "year": "2020",
+        "title": "Primeiro Encontro",
+        "description": "Um jantar romântico que confirmou que éramos um para o outro."
+      },
+      "proposal": {
+        "year": "2023",
+        "title": "O Pedido",
+        "description": "Na praia ao pôr do sol, Carlos pediu Elizabeth em casamento."
+      },
+      "wedding": {
+        "year": "2024",
+        "title": "Nosso Casamento",
+        "description": "O dia mais especial de nossas vidas, que queremos compartilhar com você."
+      }
+    }
+  },
+  "gallery": {
+    "title": "Nossos Momentos Especiais",
+    "subtitle": "Uma coleção dos momentos mais lindos que compartilhamos juntos.",
+    "photos": {
+      "beach": "Nossa primeira viagem juntos",
+      "dinner": "Comemorando nosso aniversário",
+      "proposal": "O momento do pedido",
+      "engagement": "Sessão de noivado",
+      "adventure": "Explorando o mundo",
+      "memories": "Criando memórias"
+    }
+  },
+  "location": {
+    "title": "Local e Horários",
+    "subtitle": "Todos os detalhes para que você não perca nenhum momento da nossa celebração.",
+    "venue": "Jardim Botânico Real",
+    "address": "Plaza de Murillo, 2, Madrid",
+    "schedule": {
+      "ceremony": {
+        "title": "Cerimônia",
+        "time": "16:00h",
+        "description": "Cerimônia religiosa no Jardim Botânico"
+      },
+      "cocktail": {
+        "title": "Coquetel",
+        "time": "17:30h",
+        "description": "Coquetel de boas-vindas e sessão de fotos"
+      },
+      "reception": {
+        "title": "Recepção",
+        "time": "19:00h",
+        "description": "Jantar e festa no Salão de Eventos"
+      }
+    },
+    "additionalInfo": {
+      "title": "Informações Adicionais",
+      "dressCode": "Dress code: Formal / Cocktail",
+      "parking": "Estacionamento disponível",
+      "outdoor": "Cerimônia ao ar livre",
+      "glutenFree": "Menu sem glúten disponível"
+    }
+  },
+  "rsvp": {
+    "title": "Confirme sua Presença",
+    "subtitle": "Sua presença é o melhor presente. Por favor, confirme sua presença antes de 1º de junho.",
+    "deadline": "Prazo limite: 1º de Junho, 2024"
+  }
+}

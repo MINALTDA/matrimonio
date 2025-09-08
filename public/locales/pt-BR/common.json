@@ -1,0 +1,38 @@
+{
+  "navigation": {
+    "home": "Início",
+    "story": "Nossa História",
+    "gallery": "Galeria",
+    "location": "Local",
+    "rsvp": "Confirmar"
+  },
+  "buttons": {
+    "learnMore": "Conheça Nossa História",
+    "viewMap": "Ver no Google Maps",
+    "orderUber": "Chamar Uber",
+    "confirm": "Confirmar Presença",
+    "send": "Enviar",
+    "close": "Fechar"
+  },
+  "form": {
+    "name": "Nome Completo",
+    "email": "Email",
+    "phone": "Telefone",
+    "guests": "Número de Convidados",
+    "attendance": "Você poderá nos acompanhar?",
+    "dietary": "Restrições Alimentares",
+    "message": "Mensagem Especial",
+    "required": "Campo obrigatório",
+    "yesAttend": "Sim, estarei lá!",
+    "noAttend": "Não poderei comparecer",
+    "yesDescription": "Não perderia por nada",
+    "noDescription": "Mas estarei em espírito"
+  },
+  "months": {
+    "june": "Junho"
+  },
+  "success": {
+    "title": "Obrigado por confirmar!",
+    "message": "Estamos muito animados para celebrar este dia especial com você. Enviaremos mais detalhes em breve."
+  }
+}
