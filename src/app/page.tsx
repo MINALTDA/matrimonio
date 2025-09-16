@@ -89,21 +89,39 @@
 
 
 
+// 'use client'
+
+// import Hero from './components/Hero'
+// import Welcome from './components/Welcome'
+// import CountdownTimer from './components/CountdownTimer'
+// import Poll from './components/Poll'
+// // Solo mantenemos los componentes que hemos creado/actualizado
+
+// export default function Home() {
+//   return (
+//     <main className="min-h-screen">
+//       <Hero />
+//       <Welcome />
+//       <CountdownTimer />
+//       <Poll />
+//     </main>
+//   )
+// }
+
+
+
+
+
 'use client'
 
 import Hero from './components/Hero'
-import Welcome from './components/Welcome'
-import CountdownTimer from './components/CountdownTimer'
-import Poll from './components/Poll'
-// Solo mantenemos los componentes que hemos creado/actualizado
+import TemporarySection from './components/TemporarySection'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <Welcome />
-      <CountdownTimer />
-      <Poll />
+      <TemporarySection />
     </main>
   )
 }
