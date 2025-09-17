@@ -25,7 +25,7 @@ const dancing = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  title: "Convite de Casamento - Ana & Carlos",
+  title: "Convite de Casamento - Elizabeth & Carlos",
   description: "Celebre conosco o nosso grande dia!",
   generator: "v0.app",
 }
