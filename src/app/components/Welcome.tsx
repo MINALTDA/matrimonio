@@ -85,21 +85,21 @@ export default function Welcome() {
 
   const content = welcomeContent[language] || welcomeContent.pt
 
-  // Formatear la fecha
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    }
+  // // Formatear la fecha
+  // const formatDate = (dateString: string) => {
+  //   const date = new Date(dateString)
+  //   const options: Intl.DateTimeFormatOptions = { 
+  //     year: 'numeric', 
+  //     month: 'long', 
+  //     day: 'numeric' 
+  //   }
     
-    if (language === 'es') {
-      return date.toLocaleDateString('es-ES', options)
-    } else {
-      return date.toLocaleDateString('pt-BR', options)
-    }
-  }
+  //   if (language === 'es') {
+  //     return date.toLocaleDateString('es-ES', options)
+  //   } else {
+  //     return date.toLocaleDateString('pt-BR', options)
+  //   }
+  // }
 
   return (
     <section className="py-16 bg-white">

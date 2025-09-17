@@ -160,10 +160,137 @@
 
 
 
+// "use client"
+
+// import { useLanguage } from "@/contexts/LanguageContext"
+// import { weddingData } from "@/data/weddingData"
+
+// export default function Gallery() {
+//   const { language } = useLanguage()
+
+//   const galleryContent = {
+//     es: {
+//       title: "Nuestra Historia",
+//       description: "Algunos momentos especiales de nuestra jornada juntos, capturados en fotografías que guardan nuestros mejores recuerdos.",
+//       photosTitle: "Galería de Fotos"
+//     },
+//     pt: {
+//       title: "Nossa História",
+//       description: "Alguns momentos especiais da nossa jornada juntos, capturados em fotografias que guardam nossas melhores lembranças.",
+//       photosTitle: "Galeria de Fotos"
+//     },
+//     "pt-BR": {
+//       title: "Nossa História",
+//       description: "Alguns momentos especiais da nossa jornada juntos, capturados em fotografias que guardam nossas melhores lembranças.",
+//       photosTitle: "Galeria de Fotos"
+//     }
+//   }
+
+//   const content = galleryContent[language] || galleryContent.pt
+
+//   return (
+//     <section className="py-16 bg-[#F9F4E7]"> 
+//       <div className="container mx-auto px-4">
+//         {/* Título principal "Nossa História" */}
+//         <h2 className="text-5xl font-bold text-[#3F4751] mb-4 text-center">
+//           {content.title}
+//         </h2>
+//         {/* Descripción debajo del título principal */}
+//         <p className="text-lg text-[#6B6D6F] mb-12 text-center max-w-3xl mx-auto">
+//           {content.description}
+//         </p>
+        
+//         {/* Sección de Galería de Fotos */}
+//         <div>
+//           <h3 className="font-playfair text-3xl text-[#3A3B3D] mb-8 text-center">
+//             {content.photosTitle}
+//           </h3>
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+//             {/* Foto 1 - Primer Encuentro */}
+//             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
+//               <img 
+//                 src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+//                 alt="Pareja mirándose el uno al otro"
+//                 className="w-full h-64 object-cover rounded-t-lg"
+//               />
+//               <div className="p-6 text-center">
+//                 <h4 className="font-playfair text-xl text-[#3A3B3D] mb-2">
+//                   {language === 'es' ? 'Primer Encuentro' : 'Primeiro Encontro'}
+//                 </h4>
+//                 <p className="text-[#6B6D6F]">
+//                   {language === 'es' ? 'Donde todo comenzó' : 'Onde tudo começou'}
+//                 </p>
+//               </div>
+//             </div>
+
+//             {/* Foto 2 - Compromiso */}
+//             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
+//               <img 
+//                 src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
+//                 alt="Anillo de compromiso"
+//                 className="w-full h-64 object-cover rounded-t-lg"
+//               />
+//               <div className="p-6 text-center">
+//                 <h4 className="font-playfair text-xl text-[#3A3B3D] mb-2">
+//                   {language === 'es' ? 'La Propuesta' : 'O Pedido'}
+//                 </h4>
+//                 <p className="text-[#6B6D6F]">
+//                   {language === 'es' ? 'El momento perfecto' : 'O momento perfeito'}
+//                 </p>
+//               </div>
+//             </div>
+
+//             {/* Foto 3 - Preparativos */}
+//             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
+//               <img 
+//                 src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
+//                 alt="Preparativos de boda"
+//                 className="w-full h-64 object-cover rounded-t-lg"
+//               />
+//               <div className="p-6 text-center">
+//                 <h4 className="font-playfair text-xl text-[#3A3B3D] mb-2">
+//                   {language === 'es' ? 'Preparativos' : 'Preparativos'}
+//                 </h4>
+//                 <p className="text-[#6B6D6F]">
+//                   {language === 'es' ? 'Listos para el gran día' : 'Prontos para o grande dia'}
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Mensaje adicional */}
+//           <div className="text-center mt-12">
+//             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm p-8 max-w-3xl mx-auto">
+//               <p className="text-lg text-[#6B6D6F] mb-4">
+//                 {language === 'es' 
+//                   ? 'Cada momento de nuestra historia nos ha llevado hasta aquí. Gracias por ser parte de nuestro camino.' 
+//                   : 'Cada momento da nossa história nos trouxe até aqui. Obrigado por fazer parte do nosso caminho.'
+//                 }
+//               </p>
+//               <p className="text-xl font-bold text-[#B88720]">
+//                 {weddingData.couple.bride} & {weddingData.couple.groom}
+//               </p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+
+
+
+
+
+
+
+
+
 "use client"
 
 import { useLanguage } from "@/contexts/LanguageContext"
 import { weddingData } from "@/data/weddingData"
+import Image from 'next/image'
 
 export default function Gallery() {
   const { language } = useLanguage()
@@ -208,9 +335,12 @@ export default function Gallery() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Foto 1 - Primer Encuentro */}
             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
-              <img 
+              {/* ✅ Reemplazado <img> por <Image> */}
+              <Image 
                 src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
                 alt="Pareja mirándose el uno al otro"
+                width={1770}
+                height={256}
                 className="w-full h-64 object-cover rounded-t-lg"
               />
               <div className="p-6 text-center">
@@ -225,9 +355,12 @@ export default function Gallery() {
 
             {/* Foto 2 - Compromiso */}
             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
-              <img 
+              {/* ✅ Reemplazado <img> por <Image> */}
+              <Image 
                 src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                 alt="Anillo de compromiso"
+                width={1887}
+                height={256}
                 className="w-full h-64 object-cover rounded-t-lg"
               />
               <div className="p-6 text-center">
@@ -242,9 +375,12 @@ export default function Gallery() {
 
             {/* Foto 3 - Preparativos */}
             <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
-              <img 
+              {/* ✅ Reemplazado <img> por <Image> */}
+              <Image 
                 src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                 alt="Preparativos de boda"
+                width={1887}
+                height={256}
                 className="w-full h-64 object-cover rounded-t-lg"
               />
               <div className="p-6 text-center">
