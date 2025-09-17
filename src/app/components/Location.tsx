@@ -1,182 +1,209 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { MapPin, Clock, Car, Utensils, ExternalLink } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
+import { MapPin, Clock, Phone } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { weddingData } from "@/data/weddingData"
 
 export default function Location() {
-  const { t, loading } = useTranslation('wedding')
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  })
+  const { language } = useLanguage()
 
-  const scheduleItems = [
-    {
-      title: t('location.schedule.ceremony.title', 'Ceremonia'),
-      time: t('location.schedule.ceremony.time', '16:00 hrs'),
-      description: t('location.schedule.ceremony.description', 'Ceremonia religiosa en el Jardín Botánico'),
-      icon: Clock,
-      color: 'from-blue-400 to-blue-600'
+  const locationContent = {
+    es: {
+      title: "Local & Horário",
+      subtitle: "Toda la información sobre dónde y cuándo se celebrará nuestra celebración",
+      ceremony: "Ceremonia Religiosa",
+      reception: "Recepción", 
+      getDirections: "Ver en Google Maps",
+      contactChurch: "Contacto de la iglesia",
+      contactVenue: "Contacto del local"
     },
-    {
-      title: t('location.schedule.cocktail.title', 'Cóctel'),
-      time: t('location.schedule.cocktail.time', '17:30 hrs'),
-      description: t('location.schedule.cocktail.description', 'Cóctel de bienvenida y sesión de fotos'),
-      icon: Utensils,
-      color: 'from-pink-400 to-pink-600'
+    pt: {
+      title: "Local & Horário",
+      subtitle: "Todas as informações sobre onde e quando acontecerá nossa celebração",
+      ceremony: "Cerimônia Religiosa",
+      reception: "Recepção",
+      getDirections: "Ver no Google Maps",
+      contactChurch: "Contato da igreja",
+      contactVenue: "Contato do local"
     },
-    {
-      title: t('location.schedule.reception.title', 'Recepción'),
-      time: t('location.schedule.reception.time', '19:00 hrs'),
-      description: t('location.schedule.reception.description', 'Cena y fiesta en el Salón de Eventos'),
-      icon: Car,
-      color: 'from-gold-400 to-yellow-600'
+    "pt-BR": {
+      title: "Local & Horário",
+      subtitle: "Todas as informações sobre onde e quando acontecerá nossa celebração",
+      ceremony: "Cerimônia Religiosa",
+      reception: "Recepção",
+      getDirections: "Ver no Google Maps",
+      contactChurch: "Contato da igreja",
+      contactVenue: "Contato do local"
     }
-  ]
+  }
 
-  const additionalInfo = [
-    t('location.additionalInfo.dressCode', 'Dress code: Formal / Cocktail'),
-    t('location.additionalInfo.parking', 'Estacionamiento disponible'),
-    t('location.additionalInfo.outdoor', 'Ceremonia al aire libre'),
-    t('location.additionalInfo.glutenFree', 'Menú sin gluten disponible')
-  ]
+  const content = locationContent[language] || locationContent.pt
 
-  if (loading) {
-    return (
-      <section className="py-20 bg-gradient-to-b from-rose-50 to-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="animate-pulse text-center mb-16">
-            <div className="h-8 bg-gray-300 rounded w-1/2 mx-auto mb-4"></div>
-            <div className="h-4 bg-gray-300 rounded w-3/4 mx-auto"></div>
-          </div>
-        </div>
-      </section>
-    )
+  const openDirections = (address: string) => {
+    const encodedAddress = encodeURIComponent(address)
+    window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank')
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-rose-50 to-white">
-      <div className="max-w-6xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          ref={ref}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            {t('location.title', 'Lugar y Horarios')}
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('location.subtitle', 'Todos los detalles para que no te pierdas ni un momento de nuestra celebración.')}
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Venue Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-rose-400 to-pink-600 rounded-full flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    {t('location.venue', 'Jardín Botánico Real')}
-                  </h3>
-                  <p className="text-gray-600">
-                    {t('location.address', 'Plaza de Murillo, 2, Madrid')}
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <button
-                  onClick={() => window.open('https://maps.google.com/?q=Plaza+de+Murillo+2+Madrid', '_blank')}
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  {t('buttons.viewMap', 'Ver en Google Maps')}
-                </button>
-
-                <button
-                  onClick={() => window.open('https://uber.com', '_blank')}
-                  className="w-full bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <Car className="w-5 h-5" />
-                  {t('buttons.orderUber', 'Pedir Uber')}
-                </button>
-              </div>
+    <section className="py-16 bg-[#FDFBF2]"> {/* Fondo crema claro */}
+      <div className="container mx-auto px-4">
+        {/* Título principal igual al Timeline */}
+        <h2 className="text-5xl font-bold text-[#3F4751] mb-2 text-center">
+          {content.title}
+        </h2>
+        <p className="text-center text-[#666666] mb-12">
+          {content.subtitle}
+        </p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Ceremonia */}
+          <div className="bg-[#FDFBF2] rounded-lg shadow-lg border-none overflow-hidden">
+            <div className="p-6 pb-4">
+              <h3 className="font-playfair text-2xl text-[#333333] font-semibold text-center">
+                {content.ceremony}
+              </h3>
             </div>
-
-            {/* Additional Information */}
-            <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6">
-              <h4 className="text-xl font-bold text-gray-800 mb-4">
-                {t('location.additionalInfo.title', 'Información Adicional')}
-              </h4>
-              <ul className="space-y-2">
-                {additionalInfo.map((info) => (
-                  <li key={info} className="flex items-center gap-2 text-gray-700">
-                    <div className="w-2 h-2 bg-rose-400 rounded-full" />
-                    {info}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-
-          {/* Schedule */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
-          >
-            {scheduleItems.map((item) => {
-              const IconComponent = item.icon
-              return (
-                <div key={item.title} className="bg-white rounded-2xl p-6 shadow-lg">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center`}>
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
-                      <p className="text-lg font-medium text-rose-600">{item.time}</p>
-                    </div>
+            <div className="px-6 pb-6">
+              {/* Imagen real de la iglesia */}
+              <div className="w-full h-48 rounded-md mb-6 overflow-hidden">
+                <img 
+                  src="/PNSDC.jpg" 
+                  alt="Parroquia Nossa Senhora da Conceição"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              <div className="space-y-5">
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#F4ECC8] rounded-full p-1.5 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-4 h-4 text-[#CE893F]" />
                   </div>
-                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                  <div>
+                    <p className="font-semibold text-[#333333]">
+                      {weddingData.wedding.ceremony.venue}
+                    </p>
+                    <p className="text-[#333333] text-sm">
+                      {weddingData.wedding.ceremony.address}
+                    </p>
+                  </div>
                 </div>
-              )
-            })}
-          </motion.div>
-        </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#F4ECC8] rounded-full p-1.5 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 text-[#CE893F]" />
+                  </div>
+                  <div>
+                    <p className="text-[#333333] font-semibold">
+                      {weddingData.wedding.ceremony.time}
+                    </p>
+                    <p className="text-[#333333] text-sm">
+                      04 de Outubro, 2025
+                    </p>
+                  </div>
+                </div>
 
-        {/* Map Embed */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-white rounded-2xl overflow-hidden shadow-lg"
-        >
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.4849469138147!2d-3.6943655!3d40.4137818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228f7f2f8b7d7%3A0x8b8b8b8b8b8b8b8b!2sReal%20Jard%C3%ADn%20Bot%C3%A1nico!5e0!3m2!1ses!2ses!4v1234567890123"
-            width="100%"
-            height="400"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Ubicación del evento"
-          />
-        </motion.div>
+                {/* Teléfono de ejemplo - puedes agregar al weddingData si lo necesitas */}
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#F4ECC8] rounded-full p-1.5 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-4 h-4 text-[#CE893F]" />
+                  </div>
+                  <div>
+                    <a href="tel:(11) 3456-7890" className="text-[#333333] font-semibold hover:underline">
+                      (11) 3456-7890
+                    </a>
+                    <p className="text-[#333333] text-sm">
+                      {content.contactChurch}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="pt-4">
+                  <button
+                    onClick={() => openDirections(weddingData.wedding.ceremony.address)}
+                    className="w-full inline-flex items-center justify-center rounded-md font-medium transition-colors 
+                               bg-[#DAB259] text-[#333333] hover:bg-[#C5A04D] h-12 py-3 px-6 text-base"
+                  >
+                    {content.getDirections}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Recepção */}
+          <div className="bg-[#FDFBF2] rounded-lg shadow-lg border-none overflow-hidden">
+            <div className="p-6 pb-4">
+              <h3 className="font-playfair text-2xl text-[#333333] font-semibold text-center">
+                {content.reception}
+              </h3>
+            </div>
+            <div className="px-6 pb-6">
+              {/* Imagen real del local de recepción */}
+              <div className="w-full h-48 rounded-md mb-6 overflow-hidden">
+                <img 
+                  src="/CZ.jpeg" 
+                  alt="Casa Zeeby"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              <div className="space-y-5">
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#F4ECC8] rounded-full p-1.5 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-4 h-4 text-[#CE893F]" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#333333]">
+                      {weddingData.wedding.reception.venue}
+                    </p>
+                    <p className="text-[#333333] text-sm">
+                      {weddingData.wedding.reception.address}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#F4ECC8] rounded-full p-1.5 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 text-[#CE893F]" />
+                  </div>
+                  <div>
+                    <p className="text-[#333333] font-semibold">
+                      {weddingData.wedding.reception.time}
+                    </p>
+                    <p className="text-[#333333] text-sm">
+                      04 de Outubro, 2025
+                    </p>
+                  </div>
+                </div>
+
+                {/* Teléfono de ejemplo - puedes agregar al weddingData si lo necesitas */}
+                <div className="flex items-start gap-3">
+                  <div className="bg-[#F4ECC8] rounded-full p-1.5 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-4 h-4 text-[#CE893F]" />
+                  </div>
+                  <div>
+                    <a href="tel:(11) 9876-5432" className="text-[#333333] font-semibold hover:underline">
+                      (11) 9876-5432
+                    </a>
+                    <p className="text-[#333333] text-sm">
+                      {content.contactVenue}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="pt-4">
+                  <button
+                    onClick={() => openDirections(weddingData.wedding.reception.address)}
+                    className="w-full inline-flex items-center justify-center rounded-md font-medium transition-colors 
+                               bg-[#DAB259] text-[#333333] hover:bg-[#C5A04D] h-12 py-3 px-6 text-base"
+                  >
+                    {content.getDirections}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

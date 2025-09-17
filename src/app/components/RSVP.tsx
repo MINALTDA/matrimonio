@@ -1,283 +1,330 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { useState } from 'react'
-import { Send, CheckCircle, Heart, Calendar } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
+import { useState } from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function RSVP() {
-  const { t, loading } = useTranslation('wedding')
-  const { t: tCommon } = useTranslation('common')
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  })
-
+  const { language } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    guests: '1',
     attendance: '',
-    dietary: '',
+    guests: '0',
+    dietaryRestrictions: '',
     message: ''
   })
-
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+  const rsvpContent = {
+    es: {
+      title: "Confirma tu Asistencia",
+      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 1º de junho para que possamos organizar tudo com carinho.",
+      name: "Nome Completo",
+      namePlaceholder: "Seu nome completo",
+      email: "E-mail",
+      emailPlaceholder: "seu@email.com",
+      phone: "Telefone",
+      phonePlaceholder: "(11) 99999-9999",
+      attendance: "Você irá comparecer?",
+      attendanceYes: "Sim, estarei presente!",
+      attendanceNo: "Infelizmente não poderei comparecer",
+      guests: "Número de Acompanhantes",
+      dietary: "Restrições alimentares",
+      dietaryPlaceholder: "Vegetariano, vegano, alergia, etc.",
+      message: "Mensagem para os noivos",
+      messagePlaceholder: "Deixe uma mensagem carinhosa para Elizabeth e Carlos...",
+      submit: "Confirmar Presença",
+      submitting: "Enviando...",
+      required: "Campo obrigatório",
+      successMessage: "¡Gracias por confirmar! Recibimos tu respuesta.",
+      errorMessage: "Error al enviar. Por favor intenta de nuevo."
+    },
+    pt: {
+      title: "Confirme sua Presença",
+      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 1º de junho para que possamos organizar tudo com carinho.",
+      name: "Nome Completo",
+      namePlaceholder: "Seu nome completo",
+      email: "E-mail",
+      emailPlaceholder: "seu@email.com",
+      phone: "Telefone",
+      phonePlaceholder: "(11) 99999-9999",
+      attendance: "Você irá comparecer?",
+      attendanceYes: "Sim, estarei presente!",
+      attendanceNo: "Infelizmente não poderei comparecer",
+      guests: "Número de Acompanhantes",
+      dietary: "Restrições alimentares",
+      dietaryPlaceholder: "Vegetariano, vegano, alergia, etc.",
+      message: "Mensagem para os noivos",
+      messagePlaceholder: "Deixe uma mensagem carinhosa para Elizabeth e Carlos...",
+      submit: "Confirmar Presença",
+      submitting: "Enviando...",
+      required: "Campo obrigatório",
+      successMessage: "Obrigado por confirmar! Recebemos sua resposta.",
+      errorMessage: "Erro ao enviar. Por favor tente novamente."
+    },
+    "pt-BR": {
+      title: "Confirme sua Presença",
+      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 1º de junho para que possamos organizar tudo com carinho.",
+      name: "Nome Completo",
+      namePlaceholder: "Seu nome completo",
+      email: "E-mail",
+      emailPlaceholder: "seu@email.com",
+      phone: "Telefone",
+      phonePlaceholder: "(11) 99999-9999",
+      attendance: "Você irá comparecer?",
+      attendanceYes: "Sim, estarei presente!",
+      attendanceNo: "Infelizmente não poderei comparecer",
+      guests: "Número de Acompanhantes",
+      dietary: "Restrições alimentares",
+      dietaryPlaceholder: "Vegetariano, vegano, alergia, etc.",
+      message: "Mensagem para os noivos",
+      messagePlaceholder: "Deixe uma mensagem carinhosa para Elizabeth e Carlos...",
+      submit: "Confirmar Presença",
+      submitting: "Enviando...",
+      required: "Campo obrigatório",
+      successMessage: "Obrigado por confirmar! Recebemos sua resposta.",
+      errorMessage: "Erro ao enviar. Por favor tente novamente."
+    }
+  }
+
+  const content = rsvpContent[language] || rsvpContent.pt
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try {
+      const response = await fetch('/api/submit-rsvp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitted(true)
-    setIsSubmitting(false)
-  }
+      const result = await response.json()
 
-  if (loading) {
-    return (
-      <section className="py-20 bg-gradient-to-b from-white to-rose-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="animate-pulse text-center mb-16">
-            <div className="h-8 bg-gray-300 rounded w-1/2 mx-auto mb-4"></div>
-            <div className="h-4 bg-gray-300 rounded w-3/4 mx-auto"></div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  if (isSubmitted) {
-    return (
-      <section className="py-20 bg-gradient-to-b from-white to-rose-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="bg-white rounded-3xl p-12 shadow-xl"
-          >
-            <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              {tCommon('success.title', '¡Gracias por confirmar!')}
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              {tCommon('success.message', 'Estamos muy emocionados de celebrar este día especial contigo. Te enviaremos más detalles pronto.')}
-            </p>
-            <Heart className="w-12 h-12 text-rose-500 mx-auto animate-pulse" />
-          </motion.div>
-        </div>
-      </section>
-    )
+      if (result.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: content.successMessage
+        })
+        // Limpiar formulario
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          attendance: '',
+          guests: '0',
+          dietaryRestrictions: '',
+          message: ''
+        })
+      } else {
+        throw new Error(result.message)
+      }
+    } catch (error) {
+      console.error('Error submitting RSVP:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: content.errorMessage
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-rose-50">
-      <div className="max-w-4xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          ref={ref}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            {t('rsvp.title', 'Confirma tu Asistencia')}
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-4">
-            {t('rsvp.subtitle', 'Tu presencia es el mejor regalo. Por favor, confirma tu asistencia antes del 1 de junio.')}
-          </p>
-          <div className="flex items-center justify-center gap-2 text-rose-600 font-medium">
-            <Calendar className="w-5 h-5" />
-            <span>{t('rsvp.deadline', 'Fecha límite: 1 de Junio, 2024')}</span>
-          </div>
-        </motion.div>
+    <section id="rsvp" className="py-16 bg-[#F8F3E6]">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <h2 className="text-5xl font-bold text-[#3F4751] mb-4 text-center">
+          {content.title}
+        </h2>
+        <p className="text-[#666666] text-center mb-12 text-lg max-w-3xl mx-auto">
+          {content.subtitle}
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white rounded-3xl p-8 md:p-12 shadow-xl"
-        >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {tCommon('form.name', 'Nombre Completo')} *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300"
-                  placeholder="Tu nombre completo"
-                />
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-[#FDFCF6] rounded-xl shadow-lg border border-[#E8E4D6] p-8">
+            {/* Mensaje de estado */}
+            {submitStatus.type && (
+              <div className={`mb-6 p-4 rounded-md ${
+                submitStatus.type === 'success' 
+                  ? 'bg-green-50 border border-green-200 text-green-800' 
+                  : 'bg-red-50 border border-red-200 text-red-800'
+              }`}>
+                {submitStatus.message}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="name" className="text-base font-semibold text-[#333333] mb-2 block">
+                    {content.name} *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    disabled={isSubmitting}
+                    placeholder={content.namePlaceholder}
+                    className="flex h-12 w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent disabled:opacity-50"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="text-base font-semibold text-[#333333] mb-2 block">
+                    {content.email} *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    disabled={isSubmitting}
+                    placeholder={content.emailPlaceholder}
+                    className="flex h-12 w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent disabled:opacity-50"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {tCommon('form.email', 'Email')} *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300"
-                  placeholder="tu@email.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {tCommon('form.phone', 'Teléfono')}
+                <label htmlFor="phone" className="text-base font-semibold text-[#333333] mb-2 block">
+                  {content.phone}
                 </label>
                 <input
                   type="tel"
+                  id="phone"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300"
-                  placeholder="+34 123 456 789"
+                  onChange={handleInputChange}
+                  disabled={isSubmitting}
+                  placeholder={content.phonePlaceholder}
+                  className="flex h-12 w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent disabled:opacity-50"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {tCommon('form.guests', 'Número de Invitados')} *
+                <label className="text-base font-semibold text-[#333333] mb-3 block">
+                  {content.attendance} *
                 </label>
-                <select
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300"
-                >
-                  {[1, 2, 3, 4, 5].map(num => (
-                    <option key={num} value={num}>{num}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-4">
-                {tCommon('form.attendance', '¿Podrás acompañarnos?')} *
-              </label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <label className="relative cursor-pointer">
-                  <input
-                    type="radio"
-                    name="attendance"
-                    value="yes"
-                    onChange={handleChange}
-                    className="sr-only"
-                  />
-                  <div className={`p-4 rounded-xl border-2 transition-all duration-300 ${
-                    formData.attendance === 'yes'
-                      ? 'border-green-500 bg-green-50'
-                      : 'border-gray-300 hover:border-green-300'
-                  }`}>
-                    <div className="text-center">
-                      <div className="text-2xl mb-2">🎉</div>
-                      <div className="font-medium text-gray-800">
-                        {tCommon('form.yesAttend', '¡Sí, estaré ahí!')}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {tCommon('form.yesDescription', 'No me lo perdería')}
-                      </div>
-                    </div>
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <input
+                      type="radio"
+                      id="attendance-yes"
+                      name="attendance"
+                      value="yes"
+                      checked={formData.attendance === 'yes'}
+                      onChange={handleInputChange}
+                      required
+                      disabled={isSubmitting}
+                      className="h-4 w-4 text-[#D4A82F] focus:ring-[#D4A82F] border-[#D4C4A8]"
+                    />
+                    <label htmlFor="attendance-yes" className="ml-3 text-sm text-[#333333]">
+                      {content.attendanceYes}
+                    </label>
                   </div>
-                </label>
-
-                <label className="relative cursor-pointer">
-                  <input
-                    type="radio"
-                    name="attendance"
-                    value="no"
-                    onChange={handleChange}
-                    className="sr-only"
-                  />
-                  <div className={`p-4 rounded-xl border-2 transition-all duration-300 ${
-                    formData.attendance === 'no'
-                      ? 'border-red-500 bg-red-50'
-                      : 'border-gray-300 hover:border-red-300'
-                  }`}>
-                    <div className="text-center">
-                      <div className="text-2xl mb-2">😢</div>
-                      <div className="font-medium text-gray-800">
-                        {tCommon('form.noAttend', 'No podré asistir')}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {tCommon('form.noDescription', 'Pero estaré en espíritu')}
-                      </div>
-                    </div>
+                  <div className="flex items-center">
+                    <input
+                      type="radio"
+                      id="attendance-no"
+                      name="attendance"
+                      value="no"
+                      checked={formData.attendance === 'no'}
+                      onChange={handleInputChange}
+                      required
+                      disabled={isSubmitting}
+                      className="h-4 w-4 text-[#D4A82F] focus:ring-[#D4A82F] border-[#D4C4A8]"
+                    />
+                    <label htmlFor="attendance-no" className="ml-3 text-sm text-[#333333]">
+                      {content.attendanceNo}
+                    </label>
                   </div>
-                </label>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {tCommon('form.dietary', 'Restricciones Alimentarias')}
-              </label>
-              <input
-                type="text"
-                name="dietary"
-                value={formData.dietary}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300"
-                placeholder="Vegetariano, sin gluten, alergias..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {tCommon('form.message', 'Mensaje Especial')}
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 resize-none"
-                placeholder="Comparte tus buenos deseos..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting || !formData.name || !formData.email || !formData.attendance}
-              className="w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-lg flex items-center justify-center gap-2"
-            >
-              {isSubmitting ? (
+              {formData.attendance === 'yes' && (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  Enviando...
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  {tCommon('buttons.confirm', 'Confirmar Asistencia')}
+                  <div>
+                    <label htmlFor="guests" className="text-base font-semibold text-[#333333] mb-2 block">
+                      {content.guests}
+                    </label>
+                    <input
+                      type="number"
+                      id="guests"
+                      name="guests"
+                      value={formData.guests}
+                      onChange={handleInputChange}
+                      min="0"
+                      disabled={isSubmitting}
+                      className="flex h-12 w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent disabled:opacity-50"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="dietaryRestrictions" className="text-base font-semibold text-[#333333] mb-2 block">
+                      {content.dietary}
+                    </label>
+                    <input
+                      type="text"
+                      id="dietaryRestrictions"
+                      name="dietaryRestrictions"
+                      value={formData.dietaryRestrictions}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                      placeholder={content.dietaryPlaceholder}
+                      className="flex h-12 w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent disabled:opacity-50"
+                    />
+                  </div>
                 </>
               )}
-            </button>
-          </form>
-        </motion.div>
+
+              <div>
+                <label htmlFor="message" className="text-base font-semibold text-[#333333] mb-2 block">
+                  {content.message}
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  disabled={isSubmitting}
+                  placeholder={content.messagePlaceholder}
+                  rows={4}
+                  className="flex min-h-[100px] w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent resize-y disabled:opacity-50"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full inline-flex items-center justify-center rounded-md font-bold transition-colors bg-[#D4A82F] text-white hover:bg-[#B88B27] h-14 px-8 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? content.submitting : content.submit}
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   )

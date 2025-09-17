@@ -1,50 +1,47 @@
-//src\app\layout.tsx
-import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Dancing_Script } from 'next/font/google'
-import './globals.css'
-import { LanguageProvider } from '../contexts/LanguageContext'
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter, Playfair_Display, Dancing_Script } from "next/font/google"
+import { Suspense } from "react"
+import { LanguageProvider } from "@/contexts/LanguageContext"
+import "./globals.css"
 
-const inter = Inter({ subsets: ['latin'] })
-const playfair = Playfair_Display({ 
-  subsets: ['latin'],
-  variable: '--font-playfair'
+// Fuentes elegantes para invitación de boda
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap"
 })
+
+const playfair = Playfair_Display({ 
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap"
+})
+
 const dancing = Dancing_Script({ 
-  subsets: ['latin'],
-  variable: '--font-dancing'
+  subsets: ["latin"],
+  variable: "--font-dancing",
+  display: "swap"
 })
 
 export const metadata: Metadata = {
-  title: 'Carlos & Elizabeth - Nuestra Boda | Nossa Boda',
-  description: 'Celebra con nosotros nuestro gran día | Celebre conosco nosso grande dia',
-  keywords: 'boda, matrimonio, invitación, Carlos, Elizabeth, casamento, convite, wedding',
-  authors: [{ name: 'Carlos & Elizabeth' }],
-  openGraph: {
-    title: 'Carlos & Elizabeth - Nuestra Boda',
-    description: 'Te invitamos a celebrar nuestro amor',
-    type: 'website',
-    url: 'https://carlos-elizabeth-boda.com', // Ajustar a tu dominio
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  title: "Convite de Casamento - Ana & Carlos",
+  description: "Celebre conosco o nosso grande dia!",
+  generator: "v0.app",
 }
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="es" className={`${playfair.variable} ${dancing.variable}`}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className={inter.className}>
+    <html lang="pt-BR">
+      <body className={`${inter.variable} ${playfair.variable} ${dancing.variable} font-sans antialiased`}>
         <LanguageProvider>
-          {children}
+          <Suspense fallback={<div>Loading...</div>}>
+            {children}
+          </Suspense>
         </LanguageProvider>
       </body>
     </html>
