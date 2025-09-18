@@ -10,7 +10,7 @@ export default function Timeline() {
   const timelineContent = {
     es: {
       title: "Cronograma del Día",
-      subtitle: "Confira la programación completa de nuestro gran día para no perder ningún momento especial."
+      subtitle: "Consulta la programación completa de nuestro gran día para no perder ningún momento especial."
     },
     pt: {
       title: "Cronograma do Dia",

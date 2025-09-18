@@ -23,30 +23,30 @@ export default function RSVP() {
   const rsvpContent = {
     es: {
       title: "Confirma tu Asistencia",
-      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 1º de junho para que possamos organizar tudo com carinho.",
-      name: "Nome Completo",
-      namePlaceholder: "Seu nome completo",
+      subtitle: "Tu presencia es muy importante para nosotros! Por favor, confirma hasta el dia 25º de Setiembre para que podamos organizar todo con mucho cariño",
+      name: "Nombre Completo",
+      namePlaceholder: "Tu nombre completo",
       email: "E-mail",
       emailPlaceholder: "seu@email.com",
       phone: "Telefone",
       phonePlaceholder: "(11) 99999-9999",
-      attendance: "Você irá comparecer?",
-      attendanceYes: "Sim, estarei presente!",
-      attendanceNo: "Infelizmente não poderei comparecer",
-      guests: "Número de Acompanhantes",
-      dietary: "Restrições alimentares",
+      attendance: "Usted ira a asistir?",
+      attendanceYes: "Sim, estare presente!",
+      attendanceNo: "Lamentablemente no podre asistir",
+      guests: "Número de Acompañantes",
+      dietary: "Restricciones alimenticias",
       dietaryPlaceholder: "Vegetariano, vegano, alergia, etc.",
-      message: "Mensagem para os noivos",
-      messagePlaceholder: "Deixe uma mensagem carinhosa para Elizabeth e Carlos...",
-      submit: "Confirmar Presença",
+      message: "Mensaje para los novios",
+      messagePlaceholder: "Deja un mensaje cariñoso para Elizabeth e Carlos...",
+      submit: "Confirmar Presencia",
       submitting: "Enviando...",
-      required: "Campo obrigatório",
+      required: "Campo obligatório",
       successMessage: "¡Gracias por confirmar! Recibimos tu respuesta.",
       errorMessage: "Error al enviar. Por favor intenta de nuevo."
     },
     pt: {
       title: "Confirme sua Presença",
-      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 1º de junho para que possamos organizar tudo com carinho.",
+      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 25º de Setembro para que possamos organizar tudo com carinho.",
       name: "Nome Completo",
       namePlaceholder: "Seu nome completo",
       email: "E-mail",
@@ -69,7 +69,7 @@ export default function RSVP() {
     },
     "pt-BR": {
       title: "Confirme sua Presença",
-      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 1º de junho para que possamos organizar tudo com carinho.",
+      subtitle: "Sua presença é muito importante para nós! Por favor, confirme até o dia 25º de Setembro para que possamos organizar tudo com carinho.",
       name: "Nome Completo",
       namePlaceholder: "Seu nome completo",
       email: "E-mail",
@@ -148,7 +148,7 @@ export default function RSVP() {
   }
 
   return (
-    <section id="rsvp" className="py-16 bg-[#F8F3E6]">
+    <section id="rsvp" className="py-16 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-5xl font-bold text-[#3F4751] mb-4 text-center">
           {content.title}

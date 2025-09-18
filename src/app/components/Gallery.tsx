@@ -284,8 +284,6 @@
 
 
 
-
-
 "use client"
 
 import { useLanguage } from "@/contexts/LanguageContext"
@@ -297,117 +295,92 @@ export default function Gallery() {
 
   const galleryContent = {
     es: {
-      title: "Nuestra Historia",
-      description: "Algunos momentos especiales de nuestra jornada juntos, capturados en fotografías que guardan nuestros mejores recuerdos.",
-      photosTitle: "Galería de Fotos"
+      title: "Momentos de Amor",
+      description: "El amor nos unió, creció entre nosotros y ahora florece en una hermosa familia. Con nuestro pequeño Andrés, somos tres corazones que laten como uno. Hoy pedimos la bendición de Dios para continuar este hermoso camino juntos."
     },
     pt: {
-      title: "Nossa História",
-      description: "Alguns momentos especiais da nossa jornada juntos, capturados em fotografias que guardam nossas melhores lembranças.",
-      photosTitle: "Galeria de Fotos"
+      title: "Momentos de Amor", 
+      description: "O amor nos uniu, cresceu entre nós e agora floresce em uma linda família. Com nosso pequeno Andrés, somos três corações que batem como um. Hoje pedimos a bênção de Deus para continuar este lindo caminho juntos."
     },
     "pt-BR": {
-      title: "Nossa História",
-      description: "Alguns momentos especiais da nossa jornada juntos, capturados em fotografias que guardam nossas melhores lembranças.",
-      photosTitle: "Galeria de Fotos"
+      title: "Momentos de Amor",
+      description: "O amor nos uniu, cresceu entre nós e agora floresce em uma linda família. Com nosso pequeno Andrés, somos três corações que batem como um. Hoje pedimos a bênção de Deus para continuar este lindo caminho juntos."
     }
   }
 
   const content = galleryContent[language] || galleryContent.pt
 
+  // Array de imágenes para la galería (8 imágenes en total)
+  const galleryImages = [
+    {
+      src: "/gallery-1.jpg", // Reemplaza con tus imágenes reales
+      alt: "Momento especial 1"
+    },
+    {
+      src: "/gallery-2.jpg",
+      alt: "Momento especial 2"
+    },
+    {
+      src: "/gallery-3.jpg", 
+      alt: "Momento especial 3"
+    },
+    {
+      src: "/gallery-4.jpg",
+      alt: "Momento especial 4"
+    },
+    {
+      src: "/gallery-5.jpg",
+      alt: "Momento especial 5"
+    },
+    {
+      src: "/gallery-6.jpg",
+      alt: "Momento especial 6"
+    },
+    {
+      src: "/gallery-7.jpg",
+      alt: "Momento especial 7"
+    },
+    {
+      src: "/gallery-8.jpg",
+      alt: "Momento especial 8"
+    }
+  ]
+
   return (
     <section className="py-16 bg-[#F9F4E7]"> 
       <div className="container mx-auto px-4">
-        {/* Título principal "Nossa História" */}
+        {/* Título principal "Momentos de Amor" */}
         <h2 className="text-5xl font-bold text-[#3F4751] mb-4 text-center">
           {content.title}
         </h2>
-        {/* Descripción debajo del título principal */}
-        <p className="text-lg text-[#6B6D6F] mb-12 text-center max-w-3xl mx-auto">
-          {content.description}
-        </p>
         
-        {/* Sección de Galería de Fotos */}
-        <div>
-          <h3 className="font-playfair text-3xl text-[#3A3B3D] mb-8 text-center">
-            {content.photosTitle}
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Foto 1 - Primer Encuentro */}
-            <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
-              {/* ✅ Reemplazado <img> por <Image> */}
+        {/* Descripción sentimental sin fondo blanco */}
+        <div className="text-center mb-12 max-w-4xl mx-auto">
+          <p className="text-lg text-[#6B6D6F] leading-relaxed">
+            {content.description}
+          </p>
+        </div>
+        
+        {/* Grid de 2 filas x 4 columnas */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8">
+          {galleryImages.map((image, index) => (
+            <div key={index} className="aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               <Image 
-                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                alt="Pareja mirándose el uno al otro"
-                width={1770}
-                height={256}
-                className="w-full h-64 object-cover rounded-t-lg"
+                src={image.src}
+                alt={image.alt}
+                width={300}
+                height={300}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
-              <div className="p-6 text-center">
-                <h4 className="font-playfair text-xl text-[#3A3B3D] mb-2">
-                  {language === 'es' ? 'Primer Encuentro' : 'Primeiro Encontro'}
-                </h4>
-                <p className="text-[#6B6D6F]">
-                  {language === 'es' ? 'Donde todo comenzó' : 'Onde tudo começou'}
-                </p>
-              </div>
             </div>
+          ))}
+        </div>
 
-            {/* Foto 2 - Compromiso */}
-            <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
-              {/* ✅ Reemplazado <img> por <Image> */}
-              <Image 
-                src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
-                alt="Anillo de compromiso"
-                width={1887}
-                height={256}
-                className="w-full h-64 object-cover rounded-t-lg"
-              />
-              <div className="p-6 text-center">
-                <h4 className="font-playfair text-xl text-[#3A3B3D] mb-2">
-                  {language === 'es' ? 'La Propuesta' : 'O Pedido'}
-                </h4>
-                <p className="text-[#6B6D6F]">
-                  {language === 'es' ? 'El momento perfecto' : 'O momento perfeito'}
-                </p>
-              </div>
-            </div>
-
-            {/* Foto 3 - Preparativos */}
-            <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm overflow-hidden">
-              {/* ✅ Reemplazado <img> por <Image> */}
-              <Image 
-                src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
-                alt="Preparativos de boda"
-                width={1887}
-                height={256}
-                className="w-full h-64 object-cover rounded-t-lg"
-              />
-              <div className="p-6 text-center">
-                <h4 className="font-playfair text-xl text-[#3A3B3D] mb-2">
-                  {language === 'es' ? 'Preparativos' : 'Preparativos'}
-                </h4>
-                <p className="text-[#6B6D6F]">
-                  {language === 'es' ? 'Listos para el gran día' : 'Prontos para o grande dia'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Mensaje adicional */}
-          <div className="text-center mt-12">
-            <div className="bg-white rounded-lg border border-[#E0E0DF] shadow-sm p-8 max-w-3xl mx-auto">
-              <p className="text-lg text-[#6B6D6F] mb-4">
-                {language === 'es' 
-                  ? 'Cada momento de nuestra historia nos ha llevado hasta aquí. Gracias por ser parte de nuestro camino.' 
-                  : 'Cada momento da nossa história nos trouxe até aqui. Obrigado por fazer parte do nosso caminho.'
-                }
-              </p>
-              <p className="text-xl font-bold text-[#B88720]">
-                {weddingData.couple.bride} & {weddingData.couple.groom}
-              </p>
-            </div>
-          </div>
+        {/* Nombres debajo de las fotos */}
+        <div className="text-center">
+          <p className="text-2xl font-bold text-[#B88720] font-playfair">
+             {weddingData.couple.groom}  & {weddingData.couple.bride}
+          </p>
         </div>
       </div>
     </section>

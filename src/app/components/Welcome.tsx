@@ -136,7 +136,7 @@ export default function Welcome() {
 
           {/* Nombres de la pareja */}
           <p className="text-3xl font-bold text-center text-white">
-            {weddingData.couple.bride} & {weddingData.couple.groom}
+              {weddingData.couple.groom} & {weddingData.couple.bride}
           </p>
         </div>
       </div>
