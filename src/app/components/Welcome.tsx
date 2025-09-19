@@ -85,44 +85,28 @@ export default function Welcome() {
 
   const content = welcomeContent[language] || welcomeContent.pt
 
-  // // Formatear la fecha
-  // const formatDate = (dateString: string) => {
-  //   const date = new Date(dateString)
-  //   const options: Intl.DateTimeFormatOptions = { 
-  //     year: 'numeric', 
-  //     month: 'long', 
-  //     day: 'numeric' 
-  //   }
-    
-  //   if (language === 'es') {
-  //     return date.toLocaleDateString('es-ES', options)
-  //   } else {
-  //     return date.toLocaleDateString('pt-BR', options)
-  //   }
-  // }
-
   return (
     <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 md:px-4"> {/* Más padding en móvil */}
         {/* Contenedor principal con fondo morado oscuro */}
-        <div className="max-w-4xl mx-auto bg-[#894764] rounded-lg shadow-xl p-10 md:p-12 text-white mb-16">
+        <div className="max-w-4xl mx-auto bg-[#894764] rounded-lg shadow-xl p-6 md:p-12 text-white mb-16"> {/* Menos padding interno en móvil */}
           {/* Título "Bem-vindos!" */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">
+          <h1 className="text-3xl md:text-5xl font-bold mb-8 text-center">
             {content.title}
           </h1>
 
           {/* Primer párrafo */}
-          <p className="text-lg mb-6 leading-relaxed text-gray-200">
+          <p className="text-sm mb-6 leading-relaxed text-gray-200">
             {content.paragraph1}
           </p>
           
           {/* Segundo párrafo */}
-          <p className="text-lg mb-6 leading-relaxed text-gray-200">
+          <p className="text-sm mb-6 leading-relaxed text-gray-200">
             {content.paragraph2}
           </p>
 
           {/* Tercer párrafo */}
-          <p className="text-lg mb-8 leading-relaxed text-gray-200">
+          <p className="text-sm mb-8 leading-relaxed text-gray-200">
             {content.paragraph3}
           </p>
 
@@ -130,12 +114,12 @@ export default function Welcome() {
           <hr className="border-t border-gray-400 my-8" />
 
           {/* Mensaje de cierre "Com amor," */}
-          <p className="text-xl text-center mb-2 text-gray-200">
+          <p className="text-lg text-center mb-2 text-gray-200">
             {content.closing}
           </p>
 
           {/* Nombres de la pareja */}
-          <p className="text-3xl font-bold text-center text-white">
+          <p className="text-xl font-bold text-center text-white">
               {weddingData.couple.groom} & {weddingData.couple.bride}
           </p>
         </div>

@@ -350,19 +350,19 @@ export default function Gallery() {
     <section className="py-16 bg-[#F9F4E7]"> 
       <div className="container mx-auto px-4">
         {/* Título principal "Momentos de Amor" */}
-        <h2 className="text-5xl font-bold text-[#3F4751] mb-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-[#3F4751] mb-4 text-center">
           {content.title}
         </h2>
         
         {/* Descripción sentimental sin fondo blanco */}
         <div className="text-center mb-12 max-w-4xl mx-auto">
-          <p className="text-lg text-[#6B6D6F] leading-relaxed">
+          <p className="text-base text-[#6B6D6F] leading-relaxed">
             {content.description}
           </p>
         </div>
         
         {/* Grid de 2 filas x 4 columnas */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8">
+        <div className="grid grid-cols-4 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8">
           {galleryImages.map((image, index) => (
             <div key={index} className="aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               <Image 

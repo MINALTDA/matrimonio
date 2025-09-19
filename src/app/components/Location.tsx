@@ -41,7 +41,7 @@ export default function Location() {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-5xl font-bold text-[#3F4751] mb-2 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-[#3F4751] mb-2 text-center">
           {content.title}
         </h2>
         <p className="text-center text-[#666666] mb-12">

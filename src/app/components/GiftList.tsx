@@ -597,21 +597,21 @@ export default function GiftList() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <Gift className="w-10 h-10 text-[#D2A53F] mr-3" />
-            <h2 className="text-5xl font-bold text-[#3F4751] mb-0">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#3F4751] mb-0">
               {content.title}
             </h2>
           </div>
-          <p className="text-[#666666] text-lg max-w-3xl mx-auto">
+          <p className="text-[#666666] text-base max-w-3xl mx-auto">
             {content.subtitle}
           </p>
         </div>
 
         {/* Sección de QR Codes - Brasil y Perú lado a lado */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* QR Brasil */}
           <div className="bg-white rounded-xl border border-[#E0E0E0] shadow-md p-8">
             <div className="text-center mb-6">
-              <h3 className="font-playfair text-2xl text-[#333333] font-semibold mb-3">
+              <h3 className="font-playfair text-xl text-[#333333] font-semibold mb-3">
                 {content.brazilGifts}
               </h3>
               <p className="text-[#666666] text-sm mb-6">
@@ -669,7 +669,7 @@ export default function GiftList() {
           {/* QR Perú */}
           <div className="bg-white rounded-xl border border-[#E0E0E0] shadow-md p-8">
             <div className="text-center mb-6">
-              <h3 className="font-playfair text-2xl text-[#333333] font-semibold mb-3">
+              <h3 className="font-playfair text-xl text-[#333333] font-semibold mb-3">
                 {content.peruGifts}
               </h3>
               <p className="text-[#666666] text-sm mb-6">

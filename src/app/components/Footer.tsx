@@ -180,11 +180,11 @@ export default function Footer() {
         <div className="text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Heart className="w-6 h-6 text-accent fill-current" />
-            <h3 className="text-2xl font-bold text-primary-foreground">Elizabeth & Carlos</h3>
+            <h3 className="text-xl font-bold text-primary-foreground">Elizabeth & Carlos</h3>
             <Heart className="w-6 h-6 text-accent fill-current" />
           </div>
 
-          <p className="text-primary-foreground/80 mb-6 text-pretty">04 de Outubro, 2025 • Jundiaí, SP</p>
+          <p className="text-base text-primary-foreground/80 mb-6 text-pretty">04 de Outubro, 2025 • Jundiaí, SP</p>
 
           <div className="flex items-center justify-center gap-6 mb-8">
             <a

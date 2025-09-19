@@ -150,10 +150,10 @@ export default function RSVP() {
   return (
     <section id="rsvp" className="py-16 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="text-5xl font-bold text-[#3F4751] mb-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-[#3F4751] mb-4 text-center">
           {content.title}
         </h2>
-        <p className="text-[#666666] text-center mb-12 text-lg max-w-3xl mx-auto">
+        <p className="text-[#666666] text-center mb-12 text-base max-w-3xl mx-auto">
           {content.subtitle}
         </p>
 
@@ -298,22 +298,6 @@ export default function RSVP() {
                   </div>
                 </>
               )}
-
-              <div>
-                <label htmlFor="message" className="text-base font-semibold text-[#333333] mb-2 block">
-                  {content.message}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  disabled={isSubmitting}
-                  placeholder={content.messagePlaceholder}
-                  rows={4}
-                  className="flex min-h-[100px] w-full rounded-md border border-[#D4C4A8] bg-white px-3 py-2 text-sm placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#D4A82F] focus:border-transparent resize-y disabled:opacity-50"
-                />
-              </div>
 
               <button
                 type="submit"

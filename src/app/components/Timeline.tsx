@@ -30,10 +30,10 @@ export default function Timeline() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           {/* Título principal igual a otras secciones */}
-          <h2 className="text-5xl font-bold text-[#3F4751] mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#3F4751] mb-4">
             {content.title}
           </h2>
-          <p className="text-[#666666] text-lg max-w-3xl mx-auto">
+          <p className="text-[#666666] text-base max-w-3xl mx-auto">
             {content.subtitle}
           </p>
         </div>
@@ -56,11 +56,11 @@ export default function Timeline() {
                     {event.title}
                   </h3>
                   {/* Hora del evento, alineada a la derecha y en color dorado */}
-                  <span className="font-semibold text-[#D4A82F] text-lg whitespace-nowrap ml-auto">
+                  <span className="font-semibold text-[#D4A82F] text-base whitespace-nowrap ml-auto">
                     {event.time}
                   </span>
                 </div>
-                <p className="text-[#666666] text-base">
+                <p className="text-[#666666] text-sm">
                   {event.description}
                 </p>
               </div>
