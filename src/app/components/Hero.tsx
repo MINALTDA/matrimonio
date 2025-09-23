@@ -392,7 +392,7 @@ export default function Hero() {
               </div>
               <span className="date-part">{year}</span>
             </div>
-            <div className="date-label">{language === "es" ? "Nuestra Boda" : "Nosso Casamento"}</div>
+            <div className="date-label">{language === "es" ? "Nuestro Matrimonio" : "Nosso Matrimônio"}</div>
           </div>
 
           <div className="hero-names">
@@ -482,7 +482,7 @@ export default function Hero() {
             </div>
             <span className="date-part">{year}</span>
           </div>
-          <div className="date-label">{language === "es" ? "Nuestra Boda" : "Nosso Casamento"}</div>
+          <div className="date-label">{language === "es" ? "Nuestro Matrimonio" : "Nosso Matrimônio"}</div>
         </div>
 
         {/* Names */}

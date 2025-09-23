@@ -313,35 +313,35 @@ export default function Gallery() {
   // Array de imágenes para la galería (8 imágenes en total)
   const galleryImages = [
     {
-      src: "/gallery-1.jpg", // Reemplaza con tus imágenes reales
+      src: "/gallery/abajo1.webp", // Reemplaza con tus imágenes reales
       alt: "Momento especial 1"
     },
     {
-      src: "/gallery-2.jpg",
+      src: "/gallery/abajo2.webp",
       alt: "Momento especial 2"
     },
     {
-      src: "/gallery-3.jpg", 
+      src: "/gallery/abajo3.webp", 
       alt: "Momento especial 3"
     },
     {
-      src: "/gallery-4.jpg",
+      src: "/gallery/abajo4.webp",
       alt: "Momento especial 4"
     },
     {
-      src: "/gallery-5.jpg",
+      src: "/gallery/abajo5.webp",
       alt: "Momento especial 5"
     },
     {
-      src: "/gallery-6.jpg",
+      src: "/gallery/abajo6.webp",
       alt: "Momento especial 6"
     },
     {
-      src: "/gallery-7.jpg",
+      src: "/gallery/abajo7.webp",
       alt: "Momento especial 7"
     },
     {
-      src: "/gallery-8.jpg",
+      src: "/gallery/abajo8.webp",
       alt: "Momento especial 8"
     }
   ]
