@@ -517,18 +517,13 @@
 
 
 
-
 "use client"
 
-import { useState } from "react"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { Gift, ExternalLink } from "lucide-react"
-import Image from 'next/image'
 
 export default function GiftList() {
   const { language } = useLanguage()
-  // ✅ Estados para controlar la carga de imágenes QR
-  const [qrImageLoaded, setQrImageLoaded] = useState<{[key: string]: boolean}>({})
 
   const giftContent = {
     es: {
@@ -536,7 +531,6 @@ export default function GiftList() {
       subtitle: "Su presencia ya es nuestro mayor presente, pero si desean obsequiarnos algo, preparamos algunas opciones.",
       brazilGifts: "Lista de Presentes - Brasil",
       peruGifts: "Lista de Presentes - Perú/Colombia",
-      scanQR: "Escanea el código QR o haz clic en el enlace",
       accessLink: "Acceder a la lista",
       brazilDescription: "Lista de presentes para nuestros invitados de Brasil",
       peruDescription: "Lista de presentes para nuestros invitados de Perú y Colombia"
@@ -546,7 +540,6 @@ export default function GiftList() {
       subtitle: "Sua presença já é nosso maior presente, mas se desejarem nos presentear, preparamos algumas opções.",
       brazilGifts: "Lista de Presentes - Brasil",
       peruGifts: "Lista de Presentes - Peru/Colômbia",
-      scanQR: "Escaneie o código QR ou clique no link",
       accessLink: "Acessar a lista",
       brazilDescription: "Lista de presentes para nossos convidados do Brasil",
       peruDescription: "Lista de presentes para nossos convidados do Peru e da Colômbia"
@@ -556,7 +549,6 @@ export default function GiftList() {
       subtitle: "Sua presença já é nosso maior presente, mas se desejarem nos presentear, preparamos algumas opções.",
       brazilGifts: "Lista de Presentes - Brasil",
       peruGifts: "Lista de Presentes - Peru/Colômbia",
-      scanQR: "Escaneie o código QR ou clique no link",
       accessLink: "Acessar a lista",
       brazilDescription: "Lista de presentes para nossos convidados do Brasil",
       peruDescription: "Lista de presentes para nossos convidados do Peru e da Colômbia"
@@ -565,30 +557,14 @@ export default function GiftList() {
 
   const content = giftContent[language] || giftContent.pt
 
-  // Dados dos QR codes com imagens e links
+  // Enlaces de las listas de regalos
   const giftData = {
-    qrCodes: {
-      brazil: {
-        image: "/qr-code.png", // Reemplaza con la ruta de tu QR de Brasil
-        alt: "QR Lista Brasil",
-        link: "https://sites.wedy.com/carlos-com-elizabeth"  // Reemplaza con tu link real
-      },
-      peru: {
-        image: "/qr-code2.png", // Reemplaza con la ruta de tu QR de Perú
-        alt: "QR Lista Peru",
-        link: "https://regalos.noviosabordo.com/ElizabethyCarloa" // Reemplaza con tu link real
-      }
+    brazil: {
+      link: "https://sites.wedy.com/carlos-com-elizabeth"
+    },
+    peru: {
+      link: "https://regalos.noviosabordo.com/ElizabethyCarlos"
     }
-  }
-
-  // ✅ Función para manejar la carga de imágenes QR
-  const handleQrImageLoad = (country: string) => {
-    setQrImageLoaded(prev => ({ ...prev, [country]: true }))
-  }
-
-  const handleQrImageError = (country: string) => {
-    console.log(`Error loading QR image for ${country}`)
-    setQrImageLoaded(prev => ({ ...prev, [country]: false }))
   }
 
   return (
@@ -606,11 +582,15 @@ export default function GiftList() {
           </p>
         </div>
 
-        {/* Sección de QR Codes - Brasil y Perú lado a lado */}
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* QR Brasil */}
+        {/* Sección de Listas de Regalos - Brasil y Perú lado a lado */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          
+          {/* Lista Brasil */}
           <div className="bg-white rounded-xl border border-[#E0E0E0] shadow-md p-8">
-            <div className="text-center mb-6">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Gift className="w-8 h-8 text-white" />
+              </div>
               <h3 className="font-playfair text-xl text-[#333333] font-semibold mb-3">
                 {content.brazilGifts}
               </h3>
@@ -619,56 +599,26 @@ export default function GiftList() {
               </p>
             </div>
 
-            {/* QR Code Brasil */}
-            <div className="flex justify-center mb-6">
-              <div className="bg-white p-4 rounded-xl shadow-inner border-2 border-[#F4ECC8]">
-                <div className="w-48 h-48 relative">
-                  <Image 
-                    src={giftData.qrCodes.brazil.image}
-                    alt={giftData.qrCodes.brazil.alt}
-                    fill
-                    sizes="192px"
-                    className={`rounded-lg transition-opacity duration-300 ${
-                      qrImageLoaded.brazil ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    onLoad={() => handleQrImageLoad('brazil')}
-                    onError={() => handleQrImageError('brazil')}
-                  />
-                  {/* Fallback para QR Brasil */}
-                  {!qrImageLoaded.brazil && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center rounded-lg">
-                      <div className="text-center text-green-800">
-                        <Gift className="w-12 h-12 mx-auto mb-2" />
-                        <p className="text-sm font-medium">QR Code</p>
-                        <p className="text-xs">Lista Brasil</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center space-y-4">
-              <p className="text-sm text-[#666666] italic">
-                {content.scanQR}
-              </p>
-              
+            <div className="text-center">
               {/* Botón de enlace Brasil */}
               <a
-                href={giftData.qrCodes.brazil.link}
+                href={giftData.brazil.link}
                 
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full px-4 py-3 bg-[#D2A53F] text-white rounded-md hover:bg-[#C29530] transition-colors font-medium text-base"
+                className="inline-flex items-center justify-center w-full px-6 py-4 bg-[#D2A53F] text-white rounded-lg hover:bg-[#C29530] transition-all duration-300 font-medium text-base shadow-md hover:shadow-lg transform hover:-translate-y-1"
               >
-                <ExternalLink className="w-4 h-4 mr-2" />
+                <ExternalLink className="w-5 h-5 mr-2" />
                 {content.accessLink}
               </a>
             </div>
           </div>
 
-          {/* QR Perú */}
+          {/* Lista Perú */}
           <div className="bg-white rounded-xl border border-[#E0E0E0] shadow-md p-8">
-            <div className="text-center mb-6">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Gift className="w-8 h-8 text-white" />
+              </div>
               <h3 className="font-playfair text-xl text-[#333333] font-semibold mb-3">
                 {content.peruGifts}
               </h3>
@@ -677,48 +627,15 @@ export default function GiftList() {
               </p>
             </div>
 
-            {/* QR Code Perú */}
-            <div className="flex justify-center mb-6">
-              <div className="bg-white p-4 rounded-xl shadow-inner border-2 border-[#F4ECC8]">
-                <div className="w-48 h-48 relative">
-                  <Image 
-                    src={giftData.qrCodes.peru.image}
-                    alt={giftData.qrCodes.peru.alt}
-                    fill
-                    sizes="192px"
-                    className={`rounded-lg transition-opacity duration-300 ${
-                      qrImageLoaded.peru ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    onLoad={() => handleQrImageLoad('peru')}
-                    onError={() => handleQrImageError('peru')}
-                  />
-                  {/* Fallback para QR Perú */}
-                  {!qrImageLoaded.peru && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center rounded-lg">
-                      <div className="text-center text-red-800">
-                        <Gift className="w-12 h-12 mx-auto mb-2" />
-                        <p className="text-sm font-medium">QR Code</p>
-                        <p className="text-xs">Lista Perú</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center space-y-4">
-              <p className="text-sm text-[#666666] italic">
-                {content.scanQR}
-              </p>
-              
+            <div className="text-center">
               {/* Botón de enlace Perú */}
               <a
-                href={giftData.qrCodes.peru.link}
+                href={giftData.peru.link}
                 
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full px-4 py-3 bg-[#D2A53F] text-white rounded-md hover:bg-[#C29530] transition-colors font-medium text-base"
+                className="inline-flex items-center justify-center w-full px-6 py-4 bg-[#D2A53F] text-white rounded-lg hover:bg-[#C29530] transition-all duration-300 font-medium text-base shadow-md hover:shadow-lg transform hover:-translate-y-1"
               >
-                <ExternalLink className="w-4 h-4 mr-2" />
+                <ExternalLink className="w-5 h-5 mr-2" />
                 {content.accessLink}
               </a>
             </div>

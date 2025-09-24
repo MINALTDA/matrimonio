@@ -475,6 +475,8 @@
   z-index: 1;
 }
 
+
+
 .welcome-bg-image {
   position: absolute;
   inset: 0;
@@ -488,6 +490,11 @@
               );
 }
 
+
+
+
+
+
 .welcome-overlay {
   position: absolute;
   inset: 0;
@@ -497,7 +504,7 @@
     rgba(139, 75, 107, 0.05) 50%,
     rgba(139, 75, 107, 0.15) 100%
   );
-  backdrop-filter: blur(1px);
+  /* backdrop-filter: blur(1px); */
 }
 
 .welcome-pattern {
